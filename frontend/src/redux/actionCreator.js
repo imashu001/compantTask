@@ -43,6 +43,7 @@ export const fetchUserSuccess = (data) => {
 }
 
 export const editUserInitiate = (data) => {
+  console.log(data, "data")
   return {
     type: adminAction.EDIT_USER_INITIATE,
     payload: data

@@ -36,16 +36,19 @@ const deleteUser = async(req, res) => {
 }
 
 const editUser = async(req, res) => {
-  const { userId, name, companyName, gender, dateofbirth } = req.body
+  const { _id, name, companyName, gender, dateofbirth } = req.body
   try{
-    const user = await User.findByIdAndUpdate(userId, {
+    const user = await User.findOneAndUpdate({ _id }, {
       name,
       companyName,
       gender,
       dateofbirth
+    }, {
+      new: true
     })
-  
-    res.status(201).json(user)
+    const newList = await User.find()
+    console.log(newList)
+    res.send(newList)
   }catch(err){
     res.status(400).send({err:"Bad request"})
   }

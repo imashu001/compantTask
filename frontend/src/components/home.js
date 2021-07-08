@@ -71,7 +71,7 @@ const Home = (props) => {
     deactivateModal()
   }
   const editUserHandler = () => {
-    console.log("userDetails")
+    console.log(userDetails)
     dispatch(editUserInitiate(userDetails))
     deactivateModal()
   }
@@ -84,7 +84,8 @@ const Home = (props) => {
     initialFocus="#demo-one-deactivate"
     underlayStyle={{ paddingTop: '2em' }}
     >
-      <div id="demo-one-modal" className="modal">
+      <div className="modal">
+        <h1>{data ? 'EDIT USER' : 'ADD USER'}</h1>
         <div className="modal-body">
           <input name='name' value={userDetails.name} onChange={changeHandler} />
           <input name='companyName' value={userDetails.companyName} onChange={changeHandler}/>

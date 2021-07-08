@@ -1,5 +1,5 @@
 import {put} from "redux-saga/effects"
-import {addUserSuccess, fetchUserInitiate, fetchUserSuccess} from "./actionCreator"
+import {addUserSuccess, editUserSuccess, fetchUserInitiate, fetchUserSuccess} from "./actionCreator"
 import axios from 'axios'
 
 
@@ -27,10 +27,11 @@ export function* deleteUserSaga({payload}) {
 
 export function* editUserSaga({payload}) {
   try {
-    const response = yield axios.post('http://localhost:8000/editUser', {payload})
-    console.log(response)
+    console.log(payload, "payload")
+    const response = yield axios.post('http://localhost:8000/editUser', { ...payload })
+    yield put(editUserSuccess(response))
   } catch (error) {
-    
+    console.log(error)
   }
 }
 

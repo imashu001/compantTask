@@ -14,7 +14,14 @@ export const reducer = (state=intitalState, action) => {
       return {
         ...state,
         users: action.payload
-      }        
+      }  
+    case adminAction.EDIT_USER_SUCCESS:
+
+    console.log(action.payload, "Edit data")
+      return {
+        ...state,
+        users: action.payload.data
+      }      
     default:
       return{
         ...state
