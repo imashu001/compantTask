@@ -5,6 +5,7 @@ import "./App.css";
 import Login from "./components/login";
 import Home from "./components/home"
 import Register from "./components/register";
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/" component={Home} />
+          <ProtectedRoute path="/" component={Home} />
         </Switch>
       </Container>
     </BrowserRouter>
