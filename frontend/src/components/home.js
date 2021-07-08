@@ -3,7 +3,6 @@ import _ from "lodash";
 import SemanticDatepicker from "react-semantic-ui-datepickers";
 import {
   Button,
-  Checkbox,
   Icon,
   Dropdown,
   Form,
@@ -31,7 +30,6 @@ const Home = (props) => {
   const { users, loginSuccess } = useSelector((state) => state.adminState);
 
   useEffect(() => {
-    console.log(loginSuccess);
     if (!loginSuccess && props.history) {
       props.history.push("/login");
     }
@@ -40,24 +38,11 @@ const Home = (props) => {
   const clickHandler = (id) => {
     const user = _.find(users, (user) => user._id === id);
     setSelectedUser(user);
-    // dispatch(getSingleUserInitiate(id))
     setShowModal(true);
   };
   const deactivateModal = () => {
     setShowModal(false);
   };
-  console.log("users", users);
-
-  const TableHeaderElements = [
-    "Name",
-    "Company Name",
-    "Date of Birth",
-    "Created At",
-    "Gender",
-  ];
-  const renderTableHeader = TableHeaderElements.map((itm) => {
-    return <Table.HeaderCell>{itm}</Table.HeaderCell>;
-  });
 
   const deleteHandler = (e, id) => {
     e.stopPropagation();
@@ -68,20 +53,6 @@ const Home = (props) => {
     dispatch(fetchUserInitiate());
   }, []);
 
-  const renderTableData = users.map((itm) => {
-    return (
-      <Table.Row onClick={() => clickHandler(itm._id)}>
-        <Table.Cell collapsing></Table.Cell>
-        <Table.Cell>{itm.name}</Table.Cell>
-        <Table.Cell>{itm.companyName}</Table.Cell>
-        <Table.Cell>{itm.dateofbirth}</Table.Cell>
-        <Table.Cell>{itm.createdAt}</Table.Cell>
-        <Table.Cell>{itm.gender}</Table.Cell>
-        <button onClick={(e) => deleteHandler(e, itm._id)}>delete</button>
-      </Table.Row>
-    );
-  });
-
   const Modal = ({ data }) => {
     const [userDetails, setUserDetails] = useState({ ...data });
     const dispatch = useDispatch();
@@ -89,7 +60,6 @@ const Home = (props) => {
       const name = e.target ? e.target.name : e.name;
       const value = e.target ? e.target.value : e.value;
 
-      console.log({ ...userDetails, [name]: value });
       setUserDetails({ ...userDetails, [name]: value });
     };
     const addUserHandler = () => {
@@ -97,7 +67,6 @@ const Home = (props) => {
       deactivateModal();
     };
     const editUserHandler = () => {
-      console.log(userDetails);
       dispatch(editUserInitiate(userDetails));
       deactivateModal();
     };
@@ -248,7 +217,7 @@ const Home = (props) => {
       <Navbar />
       <Table
         columnDefs={columnDefs}
-        rowData={users} //data
+        rowData={users.length ? users : []} //data
         rowClick={(data) => {
           clickHandler(data._id);
         }}

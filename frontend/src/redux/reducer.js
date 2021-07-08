@@ -3,6 +3,7 @@ import { adminAction } from "./actionTypes";
 const intitalState = {
   users: [],
   loginSuccess: false,
+  registered: false,
 };
 
 export const reducer = (state = intitalState, action) => {
@@ -11,13 +12,17 @@ export const reducer = (state = intitalState, action) => {
       return {
         ...state,
       };
+    case adminAction.SIGNUP_SUCCESS:
+      return {
+        ...state,
+        registered: true,
+      };
     case adminAction.FETCH_USER_SUCCESS:
       return {
         ...state,
         users: action.payload,
       };
     case adminAction.EDIT_USER_SUCCESS:
-      console.log(action.payload, "Edit data");
       return {
         ...state,
         users: action.payload.data,

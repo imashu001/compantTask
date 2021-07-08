@@ -7,9 +7,9 @@ export const addUserInitiate = (data) => {
   };
 };
 
-export const addUserSuccess = (data) => {
+export const registerAdminSuccess = (data) => {
   return {
-    type: adminAction.ADD_USER_SUCCESS,
+    type: adminAction.REGISTER_INIT,
     payload: data,
   };
 };
@@ -79,6 +79,7 @@ export const signUpInit = (data) => {
 };
 
 export const signUpSuccess = (data) => {
+  console.log(data);
   return {
     type: adminAction.SIGNUP_SUCCESS,
     payload: data,

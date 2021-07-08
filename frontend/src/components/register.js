@@ -1,18 +1,32 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "semantic-ui-react";
-import { signUpInit } from "../redux/actionCreator";
+import {
+  logout,
+  registerAdminSuccess,
+  signUpInit,
+} from "../redux/actionCreator";
 
 const Register = (props) => {
-  const [adminDetails, setAdminDetails] = useState({})
-  const dispatch = useDispatch()
+  const [adminDetails, setAdminDetails] = useState({});
+  const dispatch = useDispatch();
+  const { registered } = useSelector((state) => state.adminState);
+
   const handleChange = (e) => {
-      setAdminDetails({...adminDetails, [e.target.name]:e.target.value})
-  }
+    setAdminDetails({ ...adminDetails, [e.target.name]: e.target.value });
+  };
+
+  console.log(registered);
+  useEffect(() => {
+    if (registered) {
+      props.history.push("/login");
+    }
+    return dispatch(logout());
+  }, [registerAdminSuccess, registered]);
 
   const submitHandler = () => {
-    dispatch(signUpInit(adminDetails))
-  }
+    dispatch(signUpInit(adminDetails));
+  };
   return (
     <div className="form-container">
       <Form onSubmit={submitHandler}>
@@ -22,36 +36,28 @@ const Register = (props) => {
           label="Username"
           name="userName"
           placeholder="Username.."
-          // value={values.username}
           onChange={handleChange}
-          // error={errors.username ? true : false}
         />
         <Form.Input
           type="email"
           label="Email"
           name="email"
           placeholder="Email.."
-          // value={values.email}
           onChange={handleChange}
-          // error={errors.email ? true : false}
         />
         <Form.Input
           type="password"
           label="Password"
           name="password"
           placeholder="Password.."
-          // value={values.password}
           onChange={handleChange}
-          // error={errors.password ? true : false}
         />
         <Form.Input
           type="password"
           label="Confirm Password"
           name="confirmPassword"
           placeholder="Confirm Password.."
-          // value={values.confirmPassword}
           onChange={handleChange}
-          // error={errors.confirmPassword ? true : false}
         />
         <Button type="submit" primary>
           Register
