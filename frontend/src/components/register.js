@@ -6,6 +6,7 @@ import {
   registerAdminSuccess,
   signUpInit,
 } from "../redux/actionCreator";
+import { Link } from "react-router-dom";
 
 const Register = (props) => {
   const [adminDetails, setAdminDetails] = useState({});
@@ -61,6 +62,7 @@ const Register = (props) => {
         <Button type="submit" primary>
           Register
         </Button>
+        <Link to="/login"> Back to Login</Link>
       </Form>
     </div>
   );

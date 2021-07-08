@@ -215,6 +215,7 @@ const Home = (props) => {
   return (
     <div>
       <Navbar />
+      <h4>Click on The Header you Want to Sort</h4>
       <Table
         columnDefs={columnDefs}
         rowData={users.length ? users : []} //data
