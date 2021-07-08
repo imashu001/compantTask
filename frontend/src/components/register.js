@@ -16,7 +16,6 @@ const Register = (props) => {
     setAdminDetails({ ...adminDetails, [e.target.name]: e.target.value });
   };
 
-  console.log(registered);
   useEffect(() => {
     if (registered) {
       props.history.push("/login");

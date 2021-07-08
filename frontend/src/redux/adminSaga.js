@@ -18,9 +18,7 @@ const instance = axios.create({
 
 export function* addUserSaga({ payload }) {
   try {
-    console.log(payload);
     const response = yield instance.post("addUser", { ...payload });
-    console.log(response);
     yield put(fetchUserInitiate());
   } catch (error) {}
 }

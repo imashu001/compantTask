@@ -43,7 +43,6 @@ export const fetchUserSuccess = (data) => {
 };
 
 export const editUserInitiate = (data) => {
-  console.log(data, "data");
   return {
     type: adminAction.EDIT_USER_INITIATE,
     payload: data,
@@ -79,7 +78,6 @@ export const signUpInit = (data) => {
 };
 
 export const signUpSuccess = (data) => {
-  console.log(data);
   return {
     type: adminAction.SIGNUP_SUCCESS,
     payload: data,
